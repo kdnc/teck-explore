@@ -137,11 +137,17 @@
                 var index = that.current + 1;
                 // startImg.find('.img-index').html(index + ' sur ' + that.count);
 
+                // http://stackoverflow.com/questions/28322394/jquery-one-doesnot-working-correctly-in-chrome
+                var fired = false;
                 $this.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-                    startImg.addClass('fadeInScaleUp').removeClass('fadeOut');
-                    that.bigItemsList.css('pointer-events', 'auto');
-                    that.changeHeight(600);
-                });   
+                    if ( !fired ) {
+                        fired = true;
+                        startImg.addClass('fadeInScaleUp').removeClass('fadeOut');
+                        that.bigItemsList.css('pointer-events', 'auto');
+                        that.changeHeight(600);
+                    }
+                    
+                });    
             });
         },
 
